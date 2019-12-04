@@ -8,14 +8,16 @@ A view showing a list of landmarks.
 import SwiftUI
 
 struct LandmarkList: View {
-    // Procedemos con @State a introducir la posibilidad de ver los favoritos o todos. Con @State, puede cambiar con el tiempo  y afectar al comportamiento del contenido o el diseño de la vista.
+    // @State es un valor o conjunto de valores que pueden cambiar con el tiempo y afecta al comportamiento de la vista, contenido o diseño.
     @State var showFavoritesOnly = false
     
     var body: some View {
         NavigationView {
             List(landmarkData) { landmark in
+                if !self.showFavoritesOnly || landmark.isFavorite {
                 NavigationLink(destination: LandmarkDetail(landmark: landmark)) {
                     LandmarkRow(landmark: landmark)
+                    }
                 }
             }
             .navigationBarTitle(Text("Landmarks"))
